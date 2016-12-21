@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <meta name="format-detection" content="telephone=no" />
+		    <meta name="msapplication-tap-highlight" content="no" />
+		      <meta http-equiv="Content-Security-Policy" content="
+			       default-src 'self' 'unsafe-inline' ws://192.168.0.12:3000 http://code.jquery.com https://code.jquery.com  https://ssl.gstatic.com gap: data: blob: filesystem: ;
+	            " />
+        <link rel="stylesheet" href="styles.css" type="text/css">
+	      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	      <script src="https://code.jquery.com/jquery-2.1.4.js" integrity="sha256-siFczlgw4jULnUICcdm9gjQPZkw/YPDqhQ9+nAOScE4="	crossorigin="anonymous"></script>
+	      <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+        <title>BANDWAGON</title>
+    </head>
+    <body>
+
+     <!--frontpage -->
+    <div data-role="page" id="frontpage" data-theme="b">
+      	<div data-role="header">
+          <!-- menu -->
+            <a href="#popupMenu" data-rel="popup" class="ui-btn ui-btn-inline ui-btn-icon-notext ui-icon-bars"></a>
+            <div data-role="popup" id="popupMenu" data-theme="b">
+                <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                    <li><a href="#frontpage">Front of the wagon</a></li>
+                    <li><a href="#addEvent">Add your own event</a></li>
+                </ul>
+            </div>
+        		    <h1>BANDWAGON</h1>
+      	</div>
+
+      	<div data-role="main" class="ui-content ui-body-a" id="main">
+            <!--Today's events accordion -->
+            <div id="tableFront" data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                <h3 id=ownEventsHead>Events today</h3>
+                <table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow ui-corner-all" id="myTodaysEventsTable">
+                    <thead>
+                        <tr>
+                          <th data-priority="1">Event</th>
+                          <th data-priority="3">Venue</th>
+                          <th data-priority="4">City</th>
+                          <th data-priority="2">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gigsToday">
+                        <!-- gigs from database -->
+                    </tbody>
+                </table>
+              </div>
+              <!--Search artist form-->
+              <form class="ui-body ui-body-a ui-corner-all">
+                  <h4>Hop on the Bandwagon! <br> <br> Search gigs</h4>
+                  <p>Artist name:</p>
+                  <input type="text" name="artistNameInput" id="artistNameInput"/>
+                  <input type="button" name="searchArtistBTN" id="searchArtistBTN" value="Search">
+              </form>
+
+              <!--table for search results -->
+              <table data-role="table" class="ui-responsive ui-shadow ui-corner-all" id="myTable">
+                  <thead>
+                      <tr>
+                          <th data-priority="1">Venue</th>
+                          <th data-priority="4">City</th>
+                          <th data-priority="2">Time</th>
+                          <th data-priority="3">Add</th>
+                      </tr>
+                  </thead>
+                <tbody id="gigs">
+                    <!-- Search results go here -->
+                </tbody>
+              </table>
+              <!--footer -->
+              <div data-role="footer" data-position="fixed">
+                  <h4>jump on the bandwagon!</h4>
+              </div>
+          </div>
+        </div>
+
+        <!--add event page -->
+        <div data-role="page" id="addEvent" data-theme="b">
+        		<div data-role="header">
+              <!-- menu -->
+                <a href="#popupMenuEvent" data-rel="popup" class="ui-btn ui-btn-inline ui-btn-icon-notext ui-icon-bars"></a>
+                <div data-role="popup" id="popupMenuEvent" data-theme="b">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                        <li><a href="#frontpage">Front of the wagon</a></li>
+                        <li><a href="#addEvent">Add your own event</a></li>
+                    </ul>
+                </div>
+                    <h1>BANDWAGON</h1>
+        		</div>
+
+        		<div role="main" class="ui-content ui-body-a" id="main">
+              <!-- own events accordion -->
+                <div id="tableBorder" data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                    <h3 id=ownEventsHead>Own events</h3>
+                    <table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow ui-corner-all" id="ownEventsTable">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Event</th>
+                                <th data-priority="3">Venue</th>
+                                <th data-priority="5">City</th>
+                                <th data-priority="2">Time</th>
+                                <th data-priority="4">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id="events">
+                          <!-- event results go here -->
+                        </tbody>
+                    </table>
+                    <input id="pastEventsBTN" type="button" value="Show/hide past events">
+                </div>
+
+                <!-- add own event form -->
+                <div id="form">
+                    <form id="newEventFRM" class="ui-body ui-body-a ui-corner-all">
+                        <h4> Add you own event</h4>
+                    				<label for="artistNameTXT">Event name:</label>
+                    				<input type="text" name="event" id="rekno" required>
+                    				<label for="venueTXT">Venue:</label>
+                    				<input type="text" name="venue" id="venue" required>
+                    				<label for="cityTXT">City:</label>
+                    				<input type="text" name="city" id="city" required>
+                    				<label for="timeTXT">Time:</label>
+                    				<input type="date" name="time" id="time" placeholder="YYYY-MM-DD" required>
+                    				<input type="button" name="addEventBTN" id="addEventBTN" value="Add event">
+  			           </form>
+                 </div>
+              <!-- footer -->   
+              <div data-role="footer" data-position="fixed">
+                      <h4>jump on the bandwagon!</h4>
+              </div>
+          </div>
+      </div>
+
+      <script type="text/javascript" src="cordova.js"></script>
+      <script src="js/scripts.js"></script>
+  </body>
+</html>
